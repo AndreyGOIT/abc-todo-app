@@ -1,3 +1,9 @@
+/**
+ * A container component that renders a grid layout for its child components.
+ *
+ * @param {Object} props - The component props.
+ * @param {React.ReactNode} props.children - The child components to be rendered in the grid layout.
+ */
 // import TodoItem from './TodoItem';
 
 import PropTypes from 'prop-types';

@@ -1,3 +1,13 @@
+/**
+ * A React component that represents a single todo item.
+ * 
+ * The component displays the title of the todo item, a timer, and buttons to start, pause, and reset the timer.
+ * It also provides a detail view where the user can edit the description of the todo item and save the changes.
+ * 
+ * @param {object} props - The component props.
+ * @param {string} props.title - The title of the todo item.
+ * @param {string} [props.initialDescription] - The initial description of the todo item.
+ */
 import  { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 

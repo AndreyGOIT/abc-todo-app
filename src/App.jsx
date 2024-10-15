@@ -1,3 +1,9 @@
+/**
+ * The main React component for the Todo application.
+ * 
+ * This component manages the state of the todo items, provides the main layout and structure for the app,
+ * and renders the various child components that make up the UI.
+ */
 import { useState } from 'react';
 import Header from './components/Header';
 import TodoContainer from './components/TodoContainer';
