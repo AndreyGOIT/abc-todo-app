@@ -1,8 +1,13 @@
-import  { useState, useEffect } from 'react';
 
-const TodoItem = ({ title }) => {
+import  { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+
+
+const TodoItem = ({ title, initialDescription = '' }) => {
   const [time, setTime] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
+  const [isDetailView, setIsDetailView] = useState(false);
+  const [description, setDescription] = useState(initialDescription);
 
   useEffect(() => {
     let interval;
@@ -30,45 +35,117 @@ const TodoItem = ({ title }) => {
     setTime(0);
   };
 
+  const handleViewDetails = () => setIsDetailView(true);
+  const handleSave = () => {
+    // Emit updateTask event here
+    console.log('Task updated:', { title, description });
+    setIsDetailView(false);
+  };
+
   return (
-    <div className="bg-frost-white shadow-lg rounded-lg p-4 flex flex-col h-full">
+
+    <motion.div 
+      className="bg-frost-white shadow-lg rounded-lg p-4 flex flex-col h-full"
+      layout
+      transition={{ duration: 0.3 }}
+    >
       <h3 className="text-xl font-bold mb-2 text-midnight-navy border-2 border-slate-mist p-2 rounded">
         {title}
       </h3>
-      <button className="text-vibrant-coral hover:text-bold-crimson mb-4">
-        View details
-      </button>
-      <div className="text-2xl font-mono mb-4 text-center">
-        {formatTime(time)}
-      </div>
-      <div className="flex justify-between mt-auto">
-        <button 
-          onClick={handleStart}
-          className="bg-midnight-navy text-frost-white px-4 py-2 rounded"
+
+
+
+
+
+
+
+
+
+
+      {isDetailView ? (
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+          className="flex flex-col flex-grow"
         >
-          Start
-        </button>
-        <button 
-          onClick={handlePause}
-          className="bg-slate-mist text-midnight-navy px-4 py-2 rounded"
+
+
+
+
+
+          <textarea
+            className="flex-grow p-2 mb-4 border-2 border-slate-mist rounded"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            placeholder="Enter task description..."
+          />
+          <button 
+            onClick={handleSave}
+            className="bg-vibrant-coral text-frost-white px-4 py-2 rounded self-end"
+          >
+            Save
+          </button>
+        </motion.div>
+      ) : (
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+          className="flex flex-col flex-grow"
         >
-          Pause
-        </button>
-        <button 
-          onClick={handleReset}
-          className="bg-vibrant-coral text-frost-white px-4 py-2 rounded"
-        >
-          Reset
-        </button>
-      </div>
-    </div>
+
+
+
+
+
+
+
+
+
+
+          <button 
+            className="text-vibrant-coral hover:text-bold-crimson mb-4"
+            onClick={handleViewDetails}
+          >
+            View details
+          </button>
+          <div className="text-2xl font-mono mb-4 text-center">
+            {formatTime(time)}
+          </div>
+          <div className="flex justify-between mt-auto">
+            <button 
+              onClick={handleStart}
+              className="bg-midnight-navy text-frost-white px-4 py-2 rounded"
+            >
+              Start
+            </button>
+            <button 
+              onClick={handlePause}
+              className="bg-slate-mist text-midnight-navy px-4 py-2 rounded"
+            >
+              Pause
+            </button>
+            <button 
+              onClick={handleReset}
+              className="bg-vibrant-coral text-frost-white px-4 py-2 rounded"
+            >
+              Reset
+            </button>
+          </div>
+        </motion.div>
+      )}
+    </motion.div>
   );
 };
 
-import PropTypes from 'prop-types';
 
-TodoItem.propTypes = {
-  title: PropTypes.string.isRequired,
-};
+
+
+
+
+
 
 export default TodoItem;
