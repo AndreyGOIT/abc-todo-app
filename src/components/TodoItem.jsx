@@ -1,7 +1,5 @@
-
 import  { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-
 
 const TodoItem = ({ title, initialDescription = '' }) => {
   const [time, setTime] = useState(0);
@@ -43,7 +41,6 @@ const TodoItem = ({ title, initialDescription = '' }) => {
   };
 
   return (
-
     <motion.div 
       className="bg-frost-white shadow-lg rounded-lg p-4 flex flex-col h-full"
       layout
@@ -52,16 +49,6 @@ const TodoItem = ({ title, initialDescription = '' }) => {
       <h3 className="text-xl font-bold mb-2 text-midnight-navy border-2 border-slate-mist p-2 rounded">
         {title}
       </h3>
-
-
-
-
-
-
-
-
-
-
       {isDetailView ? (
         <motion.div 
           initial={{ opacity: 0 }}
@@ -70,11 +57,6 @@ const TodoItem = ({ title, initialDescription = '' }) => {
           transition={{ duration: 0.3 }}
           className="flex flex-col flex-grow"
         >
-
-
-
-
-
           <textarea
             className="flex-grow p-2 mb-4 border-2 border-slate-mist rounded"
             value={description}
@@ -96,16 +78,6 @@ const TodoItem = ({ title, initialDescription = '' }) => {
           transition={{ duration: 0.3 }}
           className="flex flex-col flex-grow"
         >
-
-
-
-
-
-
-
-
-
-
           <button 
             className="text-vibrant-coral hover:text-bold-crimson mb-4"
             onClick={handleViewDetails}
@@ -141,11 +113,11 @@ const TodoItem = ({ title, initialDescription = '' }) => {
   );
 };
 
+import PropTypes from 'prop-types';
 
-
-
-
-
-
+TodoItem.propTypes = {
+  title: PropTypes.string.isRequired,
+  initialDescription: PropTypes.string
+};
 
 export default TodoItem;
